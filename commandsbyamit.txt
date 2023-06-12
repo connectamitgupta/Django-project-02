@@ -1,0 +1,54 @@
+### Creating virtual environment
+virtualenv myenv-django-02
+
+### Activate virtual environment
+./myenv-django-02/scripts/activate.ps1
+
+### Install Django in virtual environment
+pip install django
+
+### Creating new project in django
+djnago-admin startproject trevitaapp
+
+### Run these commands
+py manage.py makemigrations
+py manage.py migrate
+
+### Help on running python.py
+py python.py help
+
+### Run djnago server
+py manage.py runserver
+
+### Creating new app in project
+django-admin startapp basics
+
+### creating urls.py in djnago app i.e trevitaessentials
+Copy same contents from project's urls.py
+
+### updating contents in project's urls.py
+1. add include reference
+        from django.urls import path, include
+2. add path to forward request to app's URL (urls.py)
+        path('',include('trevitaessentials.urls')),
+3. 
+
+### Updates settings.py for INSTALLED_APPS as per followings:
+
+    'trevitaessentials.apps.TrevitaessentialsConfig',
+    'ttunicommerce.apps.TtunicommerceConfig',
+
+### creatind two new folder for digital assets like images and contents
+(1) static
+(2) templates
+
+
+#### Update settings.py for static folder as per followings:
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+#### Update settings.py for templates folder as per followings:
+        BASE_DIR / "templates"
+
+
