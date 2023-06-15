@@ -1,0 +1,22 @@
+{% extends 'navghome.html' %}
+{% block title %} This is home page {% endblock title %}
+      
+{% block body %} 
+    
+{% if utype is "registered" %}
+<p>You are registered user here</p>
+{% endif %}
+
+
+{% if utype is not "registered" %}
+<p>Home page content here</p>
+{% endif %}
+
+{% comment %} 
+{% if request.user.is_anonymous %}
+<p>You are guest user here, Please login from <a href="signin">here</a></p>
+{% endif %} {% endcomment %}
+
+
+
+{%endblock body %}

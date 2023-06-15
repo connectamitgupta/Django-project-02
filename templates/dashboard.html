@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome at Dashboard for trevita technoogies</title>
-</head>
-<body>
-    Welcome {{request.user}}
-    <p>This is best website Dashboard ever</p>
-    <a href="/signout">signout</a>
-</body>
-</html>
+{% extends 'navgbackend.html' %}
+{% block title %} Dashboard {% endblock title %}
+      
+{% block body %} 
+    
+Dashboard content here
+Welcome {{request.user}}
+
+<a href="/signout">signout</a>
+
+{%endblock body %}

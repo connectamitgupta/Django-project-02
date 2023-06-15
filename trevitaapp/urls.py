@@ -20,5 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('trevitaessentials.urls')),
-    # path(r'^ttunicommerce/$',include('ttunicommerce.urls'))
+    path('',include('ttunicommerce.urls'))
 ]
