@@ -7,6 +7,9 @@ virtualenv myenv-django-02
 ### Install Django in virtual environment
 pip install django
 
+## or alternatively you can restore virtual environment from following commands:
+pip install -r requirements.txt
+
 ### Creating new project in django
 djnago-admin startproject trevitaapp
 
