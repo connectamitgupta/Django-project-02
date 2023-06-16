@@ -35,6 +35,31 @@ def contact(request):
 def signup(request):
     #    return HttpResponse("Hello, world. You're at the trevita essentials app for contact us")
 
+    # print(request.method)
+    if request.method == "POST":
+        # Check whether valid user is trying to login app
+        fname1=request.POST.get("firstname")
+        lname1=request.POST.get("lastname")
+        phone1=request.POST.get("phone")
+        user1 = request.POST.get("username")
+        pass1 = request.POST.get("password")
+        print("Hello world")
+        # user = authenticate(request, username=user1, password=pass1)
+        if User.objects.filter(username__exact=user1):
+            return render(request, "/signup.html")
+        
+        # if User is not None:
+        #     # A backend authentication  the credentials
+        #     login(request, User)
+        #     # print(user)
+        #     return redirect("dashboard")
+
+        else:
+            a=User(first_name=fname1,last_name=lname1,username=user1,password=pass1,is_staff=True)
+            a.save()
+            messages.success(request, "Signup created successfully")
+            return render(request, "signin.html")
+
     return render(request, "signup.html")
 
 

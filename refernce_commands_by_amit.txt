@@ -55,3 +55,10 @@ STATICFILES_DIRS = [
         BASE_DIR / "templates"
 
 
+### for generation of signup context_processors...follow this link
+https://www.javatpoint.com/django-user-registration-with-email-confirmation#:~:text=Configure%20Settings,in%20the%20settings.py%20file.&text=We%20used%20the%20email%2Did,other%20SMTP%20server%20as%20well.
+
+https://learndjango.com/tutorials/django-signup-tutorial
+
+
+### 

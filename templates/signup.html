@@ -1,11 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup page</title>
-</head>
-<body>
+{% extends 'navghome.html' %}
+{% block title %} Trevita Signup/ Signin {% endblock title %}
+
+{% block body %} 
+
+
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/signin.css" rel="stylesheet">    
+  
     
-</body>
-</html>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+
+      <form class="form-signup" method="post" action="signup">
+        {% csrf_token %}
+      {% comment %} <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> {% endcomment %}
+      <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+      <label for="firstname" class="sr-only">First name</label>
+      <input type="text" id="firstname" name="firstname" class="form-control" placeholder="first name" required autofocus>
+      <label for="lastname" class="sr-only">Last name</label>
+      <input type="text" id="lastname" name="lastname" class="form-control" placeholder="last name" required autofocus>
+      <label for="phone" class="sr-only">Mobile</label>
+      <input type="text" id="phone" name="phone" class="form-control" placeholder="mobile" required autofocus>
+
+      <label for="inputEmail" class="sr-only">Username</label>
+      <input type="text" id="username" name="username" class="form-control" placeholder="username" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
+    </form>
+    <main>
+
+
+  </div>
+</div>    
+{%endblock body %}
+
+date_joined, email, first_name, groups, id, is_active, is_staff, 
+is_superuser, last_login, last_name, logentry, password, user_permissions, username
