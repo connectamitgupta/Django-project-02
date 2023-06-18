@@ -16,9 +16,8 @@ class social_group(models.Model):
   social_media = models.CharField(max_length=2,choices=MEDIA_OPTIONS, default='WA')
   created_on=models.DateField()
 
-
-#   def __str__(self):
-#     return f"{self.media} {self.group}"
+  def __str__(self):
+    return f"{self.group_name}"
 
 
 class social_contact(models.Model):
@@ -30,6 +29,5 @@ class social_contact(models.Model):
   created_on=models.DateField()
   social_groups = models.ManyToManyField(social_group)
 
-
-#   def __str__(self):
-#     return f"{self.person_name} {self.mobile}"
+  def __str__(self):
+     return f"{self.mobile}     {self.city}"
