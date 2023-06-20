@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap5',                            ### installed bootstrap 5 for pratice.
+                                                ### installed pip install django-bootstrap-v5 through command also
+
 ]
 
 MIDDLEWARE = [
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',                   ## Installed whitespace using this W3S reference. we will use WhiteNoise, which is a Python library, built for serving static files in production.
 ]
 
 ROOT_URLCONF = 'trevitaapp.urls'
@@ -126,8 +130,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+### For global static files
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / 'mystaticfiles'
 ]
 
 EMAIL_USE_TLS = True  
@@ -135,3 +140,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kodagoindia@gmail.com'  
 EMAIL_HOST_PASSWORD = 'Kodago123456#'  
 EMAIL_PORT = 587  
+
+
+## for moving static folder files to production and you need to run commmand mentioned in followings:
+# py manage.py collectstatic
+
+STATIC_ROOT = BASE_DIR / 'productionfiles'
+

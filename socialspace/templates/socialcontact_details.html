@@ -1,0 +1,25 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Details about {{ Contactdata.person_name }} {{ Contactdata.mobile }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="mycard">
+<h1>{{ Contactdata.person_name }} {{ Contactdata.mobile }}</h1>
+  
+<p>City: {{ Contactdata.city }}</p>
+<p> Groups: </p>
+
+
+{% for x in groupinfo %}
+  <p>{{ x }}</p>
+{% endfor %}
+
+<p>Member since: {{ mymember.joined_date }}</p>
+
+<p>Back to <a href="../socialcontacts">Social Contacts List</a></p>
+</div>
+{% endblock %}  

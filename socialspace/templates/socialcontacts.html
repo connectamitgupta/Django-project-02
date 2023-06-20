@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+
+{% block title %}
+ My Social Club and their Contacts
+{% endblock %}
+
+{% block content %}
+
+<div class="mycard">
+  <h1>Members</h1>
+
+<ul>
+  {% for x in Contactdata %}
+      {% comment %} <li onclick="window.location ="\socialcontact\{{x.slug }}">{{ x.person_name }} {{ x.mobile }}</li> {% endcomment %}
+      <li> <a href="..\socialcontact\{{x.slug }}">{{ x.person_name }} {{ x.mobile }}</a></li>
+  
+      {% endfor %}
+</ul>
+
+</div>
+
+{% endblock %}
