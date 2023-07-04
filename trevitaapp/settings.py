@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    'basicsnewweb.apps.BasicsnewwebConfig',
     'socialspace.apps.SocialspaceConfig',
     'trevitaessentials.apps.TrevitaessentialsConfig',
     'ttunicommerce.apps.TtunicommerceConfig',
@@ -42,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap5',                            ### installed bootstrap 5 for pratice.
                                                 ### installed pip install django-bootstrap-v5 through command also
-
+    #  'uploads.core',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +148,11 @@ EMAIL_PORT = 587
 # py manage.py collectstatic
 
 STATIC_ROOT = BASE_DIR / 'productionfiles'
+
+# media files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 

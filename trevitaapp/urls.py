@@ -22,4 +22,6 @@ urlpatterns = [
     path('',include('trevitaessentials.urls')),
     path('',include('ttunicommerce.urls')),
      path('socialspace/',include('socialspace.urls')),
+     path('basicsnewweb/',include('basicsnewweb.urls')),
+     
 ]

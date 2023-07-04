@@ -1,12 +1,19 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect,HttpResponseRedirect, reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib import messages
 from .models import social_contacts
 from django.template import loader
+from .forms import UploadFileForm
+from .forms import DocumentForm
+from django.conf import settings
+from .models import Upload5
+import csv
 
 
+# Imaginary function to handle an uploaded file.
+from .file_handle import handle_uploaded_file
 
 # Create your views here.
 
@@ -145,3 +152,144 @@ def testing(request):
     'fruits': ['Apple', 'Banana', 'Cherry'],   
   }
   return HttpResponse(template.render(context, request))
+
+
+def upload_file_1(request):
+    #    return HttpResponse("Hello, world. You're at the trevita essentials app for contact us")
+
+    # print(request.method)
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            # handle_uploaded_file(request.FILES["file"])
+            # form.save()
+            a=request.POST.get('firstname')
+            b=request.POST.get('lastname')
+            c=request.FILES['file'].name
+            print(f"a: {a} and b : {b} and c: {c}")
+
+            folder = request.path.replace("/", "_")
+            uploaded_filename = request.FILES['file'].name
+            
+            messages.success(request, "Data received")
+            return HttpResponseRedirect("/uploader_1")
+        
+        # print(UploadedFile.name)
+    else:
+        form = UploadFileForm()
+    return render(request, "uploader_1.html", {"form": form})
+
+def upload_file_2(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('uploader_2')
+    else:
+        form = DocumentForm()
+    return render(request, 'uploader_2.html', {
+        'form': form
+    })
+
+
+def upload_file_3(request):
+    if request.method == "POST":
+        print("Reuest handling.....")
+        p=request.FILES['image']
+        from .models import Upload3
+        upload=Upload3(pic=p)
+        upload.save()
+    return render(request, 'uploader_3.html')
+
+# Reference purpose     https://www.youtube.com/watch?v=rNrZStmeD7I
+
+
+def upload_file_4(request):
+    if request.method == "POST":
+        print("Reuest handling.....")
+        n=request.POST.get("fname")
+        p=request.FILES['image']
+        from .models import Upload4
+        upload=Upload4(name=n, pic=p)
+        upload.save()
+    return render(request, 'uploader_4.html')
+
+
+def upload_file_5(request):
+    if request.method == "POST":
+        print("Reuest handling.....")
+        
+        # if 'desc' in request.POST:
+        #     d = request.POST.get('desc')
+        # if 'image' in request.POST:
+        #     p = request.FILES.get['image']
+
+        d=request.POST.get("desc")
+        p=request.FILES['image']
+    # if file is not CSV  
+        if not p.name.endswith('.csv'):
+            messages.error(request,'File is not CSV type')
+            return HttpResponseRedirect(reverse("trevitaessentials:upload_csv"))
+
+    #if file is too large, return
+        if p.multiple_chunks():
+            messages.error(request,"Uploaded file is too big (%.2f MB)." % (p.size/(1000*1000),))
+            return HttpResponseRedirect(reverse("trevitaessentials:upload_csv"))
+
+    # save file upload informtion in db
+        from .models import Upload5
+        upload=Upload5(description=d, pic=p)
+        upload.save()
+    # Reading file
+        # upload5=Upload5       https://www.youtube.com/watch?v=t3BdM6JlAmY
+        obj=Upload5.objects.all()
+        # contact=social_contacts.objects.all().values
+        for i in obj:
+            print(i.description)
+     
+    return render(request, 'uploader_5.html')
+
+def view_file_5(request):
+    from .models import Upload5
+    upload5=Upload5.objects.all()
+    context = {
+    'filesdata': upload5,
+               }
+
+    return render(request,"uploader_view5.html",context)
+
+
+
+def upload_file_6(request):
+    if request.method == "POST":
+        print("Reuest handling.....")
+
+        d=request.POST.get("desc")
+        p=request.FILES['image']
+    # if file is not CSV  
+        if not p.name.endswith('.csv'):
+            messages.error(request,'File is not CSV type')
+            return HttpResponseRedirect(reverse("trevitaessentials:upload_csv"))
+
+    #if file is too large, return
+        if p.multiple_chunks():
+            messages.error(request,"Uploaded file is too big (%.2f MB)." % (p.size/(1000*1000),))
+            return HttpResponseRedirect(reverse("trevitaessentials:upload_csv"))
+
+    # save file upload informtion in db
+        from .models import Upload6
+        upload=Upload6(description=d, pic=p)
+        # upload.save()
+        # New way to save record so that we get just saved record id properly
+        n = Upload6.objects.create(description=d, pic=p)
+        rid=n.pk
+
+    # Reading file
+        # upload5=Upload5       https://www.youtube.com/watch?v=t3BdM6JlAmY
+        obj=Upload6.objects.get(id=rid)
+        # contact=social_contacts.objects.all().values
+        print(obj.description)
+        print(obj.pic.path)
+
+     
+    return render(request, 'uploader_6.html')

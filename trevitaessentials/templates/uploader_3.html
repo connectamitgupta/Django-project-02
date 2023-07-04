@@ -1,0 +1,21 @@
+{% comment %} {% extends 'navghome.html' %}
+
+{% block title %} File Uploader{% endblock title %}
+      
+{% block content %}
+
+  
+{% endblock %} {% endcomment %}
+<html>
+  <head>
+  </head>
+<body>
+<form action="uploader_3" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="image">
+  <button type="submit">Upload</button>
+</form>
+
+ <p><a href="{% url 'home' %}">Return to home</a></p>
+</body>
+</html>
