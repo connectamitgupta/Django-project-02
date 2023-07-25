@@ -61,4 +61,5 @@ https://www.javatpoint.com/django-user-registration-with-email-confirmation#:~:t
 https://learndjango.com/tutorials/django-signup-tutorial
 
 
-### 
+### Bootstrap 4 use:
+# https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp

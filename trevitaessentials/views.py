@@ -242,10 +242,29 @@ def upload_file_5(request):
         upload.save()
     # Reading file
         # upload5=Upload5       https://www.youtube.com/watch?v=t3BdM6JlAmY
-        obj=Upload5.objects.all()
+        obj=Upload6.objects.get(id=rid)
         # contact=social_contacts.objects.all().values
-        for i in obj:
-            print(i.description)
+        print(obj.description)
+        print(obj.pic.path)
+        # import csv
+
+        with open(obj.pic.path) as csv_file:
+            print("test")
+            if csv_file.closed:
+                print ('file is closed')
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+            csvdata=[]
+            for row in csv_reader:
+                if line_count == 0:
+                    print(f'Column names are {", ".join(row)}')
+                    line_count += 1
+                else:
+                    print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
+                    csvdata=row
+                    line_count += 1
+        print(f'Processed {line_count} lines.')
+
      
     return render(request, 'uploader_5.html')
 
@@ -290,6 +309,37 @@ def upload_file_6(request):
         # contact=social_contacts.objects.all().values
         print(obj.description)
         print(obj.pic.path)
+        # import csv
 
-     
+        context = {}
+        reader=csv.DictReader(str(request.FILES['image']))
+        for row in reader:
+            header = list(row.keys())
+            break
+        data = {}
+        for row in reader:
+            for i in header:
+                values = []
+                values.append(row.get(i))
+                if i not in data:
+                    data[i] = values
+                data[i].extend(values)
+        context['header'] = header
+        context['data'] = data
+        print(reader)
+        return render(request, 'uploader_6.html', context)
+
+    
+
+     #https://gurusabarish.medium.com/display-the-uploaded-csv-file-in-django-template-199aa8711695
     return render(request, 'uploader_6.html')
+
+
+def view_file_6(request):
+    from .models import Upload6
+    upload6=Upload6.objects.all()
+    context = {
+    'filesdata': upload6,
+               }
+
+    return render(request,"uploader_view6.html",context)

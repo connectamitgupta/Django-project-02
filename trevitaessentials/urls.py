@@ -27,6 +27,7 @@ urlpatterns = [
     path('uploader_5', views.upload_file_5, name='upload_csv'),
     path('view_5', views.view_file_5, name='view5'),
     path('uploader_6', views.upload_file_6, name='uploader6'),
+    path('view_6', views.view_file_6, name='view6'),
 
 
     path('testing', views.testing, name='testing')
